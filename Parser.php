@@ -75,7 +75,7 @@ class Parser
      *
      * @param string $text
      * @return Result
-     * @throws SmsError
+     * @throws SmsError|ParserError
      */
     public function parse(string $text) : Result
     {
@@ -86,6 +86,10 @@ class Parser
 
         if ($error = $this->errorsChain->handle($text)) {
             throw SmsError::create($error);
+        }
+
+        if (!$result->isValid()) {
+            throw ParserError::create(ParserError::INVALID_RESULT);
         }
 
         return $result;

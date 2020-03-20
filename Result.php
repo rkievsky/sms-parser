@@ -78,4 +78,16 @@ class Result
             $this->password
         );
     }
+
+    /**
+     * Проверка валидности результата
+     *
+     * @return bool
+     */
+    public function isValid()
+    {
+        return (bool) $this->id
+            && (bool) $this->sum
+            && (bool) $this->password;
+    }
 }
