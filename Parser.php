@@ -24,7 +24,7 @@ class Parser
      */
     private function setIdChain() : void
     {
-        $this->idChain = new TextChain('/перевод на счет[\s\D\W]+([0-9]{13})/ui');
+        $this->idChain = new TextChain('/перевод на сч[её]{1}т[\s\D\W]+([0-9]{13})/ui');
     }
 
     /**
@@ -34,7 +34,7 @@ class Parser
     {
         $this->sumChain = new TextChain('/спишется[\s\D\W]+([0-9]+)р/ui'); // сумма без копеек
         $this->sumChain->setSuccessBreakPoint()
-            ->setNext(new TextChain('/спишется[\s\D\W]+([0-9]+\,[0-9]+)р/ui'));  // сумма с копейками
+            ->setNext(new TextChain('/спишется[\s\D\W]+([0-9]+[\,\.]{1}[0-9]+)р/ui'));  // сумма с копейками
     }
 
     /**
@@ -42,7 +42,7 @@ class Parser
      */
     private function setPasswordChain() : void
     {
-        $this->passwordChain = new TextChain('/пароль: \b([\d]+)\b/ui');
+        $this->passwordChain = new TextChain('/пароль:\s+\b([\d]+)\b/ui');
     }
 
     /**
